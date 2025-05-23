@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from recipe.models import *
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404
 
 
 def main(request):
@@ -9,6 +9,6 @@ def main(request):
     return render(request, 'main.html', context={'recipes': recipes})
 
 def recipe_detail(request, recipe_id):
-    recipes = Recipe.objects.get(id=recipe_id)
+    recipes = Recipe.get_object_or_404(id=recipe_id)
 
     return render(request, 'recipe_detail.html', context={'recipes': recipes})
